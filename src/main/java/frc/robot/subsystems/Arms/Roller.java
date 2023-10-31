@@ -48,15 +48,7 @@ public class Roller {
         return rollerInstance;
     }
 
-    public void pickUp() {
-        rollerMotor.set(0.2);
-        // wait
-        rollerMotor.stopMotor();
-    }
-
-    public void putDown() {
-        rollerMotor.set(-0.2);
-        // wait
-        rollerMotor.stopMotor();
+    public void rotate(double speed) {
+        rollerMotor.set(speed);
     }
 }
