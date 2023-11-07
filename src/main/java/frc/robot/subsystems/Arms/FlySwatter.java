@@ -10,6 +10,10 @@ import frc.robot.Libraries.Util.SparkMax.SparkMaxStatusFrames;
 
 
 public class FlySwatter {
+    private static FlySwatter FlySwatterInstance;
+    private static CANSparkMax FlySwatterMotor;
+    private static SparkMaxConfig FlySwatterConfig;
+
     public static FlySwatter getInstance() {
         if (FlySwatterInstance == null) {
             FlySwatterInstance = new FlySwatter();
@@ -20,10 +24,10 @@ public class FlySwatter {
     public FlySwatter () {
         FlySwatterMotor = new CANSparkMax(15, MotorType.kBrushless);
         FlySwatterConfig = new SparkMaxConfig(null, 0, false, null, 0, 0, false, FlySwatterMotor);
-            private static FlySwatter FlySwatterInstance = null;
-        private CANSparkMax FlySwatterMotor;
-        private SparkMaxConfig FlySwatterConfig;
+        /*FlySwatter FlySwatterInstance = null;*/
         SparkMaxSetup.setup(FlySwatterMotor, FlySwatterConfig);
     }
-    
+    public void setSpeed(){
+        FlySwatterMotor.set(0.1);
+    }
 }
