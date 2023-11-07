@@ -35,7 +35,7 @@ public class Roller {
             false,
             2048,
             false,
-            new PIDConfig(0, 0, 0, 0)
+            new PIDConfig(5, 0, 0, 0)
         );
 
         SparkMaxSetup.setup(rollerMotor, rollerConfig);
