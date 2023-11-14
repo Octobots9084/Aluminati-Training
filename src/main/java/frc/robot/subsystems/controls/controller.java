@@ -11,6 +11,7 @@ public class controller {
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 1).onFalse(new RollerIntake(0));
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 2).onTrue(new FlySwatterInstant(0.1));
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 2).onFalse(new FlySwatterInstant(0));
-        
+        new JoystickButton(ControlMap.DRIVER_BUTTONS, 3).onTrue(new FlySwatterInstant(-0.1));
+        new JoystickButton(ControlMap.DRIVER_BUTTONS, 3).onFalse(new FlySwatterInstant(0)); 
     }
 }
