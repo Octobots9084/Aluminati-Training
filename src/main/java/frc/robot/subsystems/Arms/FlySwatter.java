@@ -1,5 +1,6 @@
 package frc.robot.subsystems.Arms;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -37,17 +38,20 @@ public class FlySwatter extends SubsystemBase {
         true,
         SparkMaxEncoderType.Absolute,
         IdleMode.kCoast,
-        20, 
-        20, 
-        false, 
+        15, 
+        15, 
+        true, 
         false,
         4096,
         false,
-        new PIDConfig(1, 0, 0, 0));
+        new PIDConfig(1.7, 0, 0, 0));
         /*FlySwatter FlySwatterInstance = null;*/
         SparkMaxSetup.setup(FlySwatterMotor, FlySwatterConfig);
     }
     public void setSpeed(double speed){
         FlySwatterMotor.set(speed);
+    }
+    public void setAngle(double angle){
+        FlySwatterMotor.getPIDController().setReference(angle, ControlType.kPosition);
     }
 }

@@ -4,15 +4,15 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 public class FlySwatterInstant extends InstantCommand{
     private FlySwatter flySwatter;
-    private double speed;
+    private double angle;
 
-    public FlySwatterInstant(double Speed) {
+    public FlySwatterInstant(double Angle) {
        flySwatter = FlySwatter.getInstance();
-       this.speed = Speed;
+       this.angle = Angle;
     }
     
     @Override
     public void initialize() {
-        this.flySwatter.setSpeed(speed);
+        this.flySwatter.setAngle(angle);
     }
 }
