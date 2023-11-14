@@ -2,6 +2,8 @@ package frc.robot.subsystems.Arms;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Libraries.Util.PIDConfig;
 import frc.robot.Libraries.Util.SparkMax.SparkMaxConfig;
 import frc.robot.Libraries.Util.SparkMax.SparkMaxEncoderType;
@@ -9,7 +11,7 @@ import frc.robot.Libraries.Util.SparkMax.SparkMaxSetup;
 import frc.robot.Libraries.Util.SparkMax.SparkMaxStatusFrames;
 
 
-public class FlySwatter {
+public class FlySwatter extends SubsystemBase {
     private static FlySwatter FlySwatterInstance;
     private static CANSparkMax FlySwatterMotor;
     private static SparkMaxConfig FlySwatterConfig;
@@ -23,11 +25,29 @@ public class FlySwatter {
 
     public FlySwatter () {
         FlySwatterMotor = new CANSparkMax(15, MotorType.kBrushless);
-        FlySwatterConfig = new SparkMaxConfig(null, 0, false, null, 0, 0, false, FlySwatterMotor);
+        FlySwatterConfig = new SparkMaxConfig(new SparkMaxStatusFrames(
+            500,
+            20,
+            500,
+            500,
+            500,
+            20,
+            500),
+        1000,
+        true,
+        SparkMaxEncoderType.Absolute,
+        IdleMode.kCoast,
+        20, 
+        20, 
+        false, 
+        false,
+        4096,
+        false,
+        new PIDConfig(1, 0, 0, 0));
         /*FlySwatter FlySwatterInstance = null;*/
         SparkMaxSetup.setup(FlySwatterMotor, FlySwatterConfig);
     }
-    public void setSpeed(){
-        FlySwatterMotor.set(0.1);
+    public void setSpeed(double speed){
+        FlySwatterMotor.set(speed);
     }
 }
