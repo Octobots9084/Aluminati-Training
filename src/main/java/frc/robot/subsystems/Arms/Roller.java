@@ -3,13 +3,14 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Libraries.Util.PIDConfig;
 import frc.robot.Libraries.Util.SparkMax.SparkMaxConfig;
 import frc.robot.Libraries.Util.SparkMax.SparkMaxEncoderType;
 import frc.robot.Libraries.Util.SparkMax.SparkMaxSetup;
 import frc.robot.Libraries.Util.SparkMax.SparkMaxStatusFrames;
 
-public class Roller {
+public class Roller extends SubsystemBase {
     private static Roller rollerInstance = null;
     private CANSparkMax rollerMotor;
     private SparkMaxConfig rollerConfig;
