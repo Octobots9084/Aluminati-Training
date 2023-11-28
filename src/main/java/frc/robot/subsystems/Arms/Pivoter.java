@@ -31,7 +31,7 @@ public class Pivoter extends SubsystemBase {
             1000,
             true,
             SparkMaxEncoderType.Absolute,
-            IdleMode.kCoast,
+            IdleMode.kBrake,
             20,
             20,
             false,
@@ -39,7 +39,7 @@ public class Pivoter extends SubsystemBase {
             4096,
             false,
             // kP is currentlt too low
-            new PIDConfig(5, 0, 0, 0)
+            new PIDConfig(16, 0, 1.6, 0)
         );
 
         SparkMaxSetup.setup(pivotMotor1, motorConfig);
