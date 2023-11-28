@@ -3,7 +3,7 @@
   "wheelGripCoefficientOfFriction": 0.9,
   "gearRatio": {
     "drive": 3.64,
-    "angle": 20
+    "angle": 0
   },
   "currentLimit": {
     "drive": 40,
@@ -15,6 +15,6 @@
   },
   "encoderPulsePerRotation": {
     "drive": 2048,
-    "angle": 4096
+    "angle": 1
   }
 }

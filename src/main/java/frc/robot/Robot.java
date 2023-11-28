@@ -136,12 +136,14 @@ public class Robot extends TimedRobot
   /**
    * This function is called periodically during operator control.
    */
+  XboxController controller = new XboxController(0);
   @Override
   public void teleopPeriodic()
   {
-    XboxController controller = new XboxController(0);
+    
     Translation2d driver = new Translation2d(controller.getLeftX(), controller.getLeftY());
-    SwerveSubsystem.drive(driver, 0, true, false);
+    double rotation = controller.getRightX();
+    SwerveSubsystem.drive(driver, rotation, false, false);
     if(controller.getAButton()){
       SwerveSubsystem.zeroGyro();
     }
