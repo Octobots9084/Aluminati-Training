@@ -38,7 +38,7 @@ public class Wrist extends SubsystemBase {
             4096,
             false,
             // kP is currentlt too low
-            new PIDConfig(0.1, 0, 0, 0)
+            new PIDConfig(0.67, 0, 0, 0)
         );
 
         SparkMaxSetup.setup(wristMotor1, motorConfig);
@@ -58,6 +58,6 @@ public class Wrist extends SubsystemBase {
         wristMotor1.getPIDController().setReference(position, ControlType.kPosition);
     }
 
-    
+
 }
 

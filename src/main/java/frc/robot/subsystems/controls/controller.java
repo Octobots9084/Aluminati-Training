@@ -23,9 +23,11 @@ public class controller {
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 2).onTrue(new ArmPivot(0.7));
 
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 6).onTrue(new WristPivot(0.6));
-        new JoystickButton(ControlMap.DRIVER_BUTTONS, 3).onTrue(new WristPivot(0.25));
+        new JoystickButton(ControlMap.DRIVER_BUTTONS, 3).onTrue(new WristPivot(0.4));
 
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 9).onTrue(new MainRollerIntake(0.2));
+        new JoystickButton(ControlMap.DRIVER_BUTTONS, 9).onFalse(new MainRollerIntake(0));
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 10).onTrue(new MainRollerIntake(-0.2));
+        new JoystickButton(ControlMap.DRIVER_BUTTONS, 10).onFalse(new MainRollerIntake(0));
     }
 }

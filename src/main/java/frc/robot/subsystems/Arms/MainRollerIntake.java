@@ -3,11 +3,11 @@ package frc.robot.subsystems.Arms;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 public class MainRollerIntake extends InstantCommand {
-    private Roller roller;
+    private MainRoller roller;
     private double speed;
 
     public MainRollerIntake(double speed) {
-        roller = Roller.getInstance();
+        roller = MainRoller.getInstance();
         this.speed = speed;
     }
 
