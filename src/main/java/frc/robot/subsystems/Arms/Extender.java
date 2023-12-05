@@ -57,7 +57,16 @@ public class Extender extends SubsystemBase {
     /**
      * @param position Meters
      */
+
+     double MIN_POS = 0;
+    double MAX_POS = 0.2;
     public void extend(double position) {
+        double temp_pos = position;
+        if(temp_pos<MIN_POS){
+            temp_pos = MIN_POS;
+        } else if(temp_pos>MAX_POS){
+            temp_pos = MAX_POS;
+        }
         double convertedPosition = ((position/toothHoleSpacing)/teethNum)*gearRatio;
         extensionMotor.getPIDController().setReference(convertedPosition, ControlType.kPosition);
     }
