@@ -11,12 +11,19 @@ public class RevKinem extends InstantCommand {
         wristAngle = absWristAngle;
         this.targetX = targetX;
         this.targetY = targetY; 
+
+        
+        calculateReverseKinematics.setVariables(absWristAngle, targetX, targetY);
+        Pivoter.getInstance().rotate(calculateReverseKinematics.calcPivotAngle());
+        Wrist.getInstance().rotate(absWristAngle);
+        Extender.getInstance().extend(calculateReverseKinematics.calcExtensionDistance());
+        
     }
 
     public static void main(String[] args)
     {
-        CalcRevKinem.setVariables(0.82, 3, 1);
-        System.out.println(CalcRevKinem.calcPivotAngle());
-        System.out.println(CalcRevKinem.calcExtensionDistance());
+        calculateReverseKinematics.setVariables(0.82, 3, 1);
+        System.out.println(calculateReverseKinematics.calcPivotAngle());
+        System.out.println(calculateReverseKinematics.calcExtensionDistance());
     }
 }

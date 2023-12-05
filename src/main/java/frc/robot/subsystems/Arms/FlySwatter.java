@@ -51,7 +51,16 @@ public class FlySwatter extends SubsystemBase {
     public void setSpeed(double speed){
         FlySwatterMotor.set(speed);
     }
+
+    double MIN_ANGLE = 0.17;
+    double MAX_ANGLE = 0.41;
     public void setAngle(double angle){
-        FlySwatterMotor.getPIDController().setReference(angle, ControlType.kPosition);
+        double temp_angle = angle;
+        if(temp_angle<MIN_ANGLE){
+            temp_angle = MIN_ANGLE;
+        } else if(temp_angle>MAX_ANGLE){
+            temp_angle = MAX_ANGLE;
+        }
+        FlySwatterMotor.getPIDController().setReference(temp_angle, ControlType.kPosition);
     }
 }

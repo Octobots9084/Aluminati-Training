@@ -77,7 +77,16 @@ public class Pivoter extends SubsystemBase {
     /**
      * @param position Meters
      */
-    public void rotate(double position) {
-        pivotMotor1.getPIDController().setReference(position, ControlType.kPosition);
+    
+     double MIN_ANGLE = 0.535;
+    double MAX_ANGLE = 0.7;
+    public void rotate(double angle) {
+        double temp_angle = angle;
+        if(temp_angle<MIN_ANGLE){
+            temp_angle = MIN_ANGLE;
+        } else if(temp_angle>MAX_ANGLE){
+            temp_angle = MAX_ANGLE;
+        }
+        pivotMotor1.getPIDController().setReference(angle, ControlType.kPosition);
     }
 }
