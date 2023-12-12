@@ -52,9 +52,17 @@ public class Wrist extends SubsystemBase {
         return armInstance;
     }
     /**
-     * @param position Meters
+     * @param position Rotations
      */
+    double MAX_ANGLE;
+    double MIN_ANGLE;
     public void rotate(double position) {
+        if(position < MIN_ANGLE){
+            position = MIN_ANGLE;
+        } else if(position > MAX_ANGLE){
+            position = MAX_ANGLE;
+        }
+
         wristMotor1.getPIDController().setReference(position, ControlType.kPosition);
     }
 

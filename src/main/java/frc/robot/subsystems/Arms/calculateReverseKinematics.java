@@ -1,57 +1,65 @@
 package frc.robot.subsystems.Arms;
 
 public class CalculateReverseKinematics {
-    private static final double pivotHeight = 0.8382;
-    private static final double minExtension = 0.6604;
-    private static final double wristLength = 0.135255;
+    private static double pivotHeight = 0.8382;
+    private static double minExtension = 0.6604;
+    private static double wristLength = 0.135255;
     
-    private static double a;
-    private static double b = minExtension;
-    private static double c = pivotHeight;
-    private static double d = wristLength;
-    private static double g;
-    private static double h;
+    private static double targetX;
+    private static double targetY;
+    private static double absWristAngle;
     
     // absWristAngle should be given in radians, output will also be in radians
-    public static void setVariables(double absWristAngle, double targetX, double targetY) {
-        a = targetY;
-        g = absWristAngle;
-        h = targetX;
+    public static void setVariables(double awa, double tX, double tY) {
+        targetY = tY;
+        absWristAngle = awa;
+        targetX = tX;
     }
     
     public static double calcPivotAngle() {
         
-        
-        return 2*Math.atan(
+        // I'm pretty sure this is good
+        return (2*Math.atan(
             (
                 1 / 
-                (a - c - (d*Math.sin(g)))
+                (targetY - pivotHeight - (wristLength*Math.sin(absWristAngle)))
             ) * 
             (
                 Math.sqrt(
-                    (a*a) - 
-                    (2*a*c) - 
-                    (2*a*d*Math.sin(g)) + 
-                    (c*c) + 
-                    (2*c*d*Math.sin(g)) + 
-                    (d*d*Math.sin(g)*Math.sin(g)) + 
-                    (d*d*Math.cos(g)*Math.cos(g)) - 
-                    (2*d*h*Math.cos(g)) + 
-                    (h*h)
+                    (targetY*targetY) - 
+                    (2*targetY*pivotHeight) - 
+                    (2*targetY*wristLength*Math.sin(absWristAngle)) + 
+                    (pivotHeight*pivotHeight) + 
+                    (2*pivotHeight*wristLength*Math.sin(absWristAngle)) + 
+                    (wristLength*wristLength*Math.sin(absWristAngle)*Math.sin(absWristAngle)) + 
+                    (wristLength*wristLength*Math.cos(absWristAngle)*Math.cos(absWristAngle)) - 
+                    (2*wristLength*targetX*Math.cos(absWristAngle)) + 
+                    (targetX*targetX)
                 ) + 
-                (d*Math.cos(g)) - h
+                (wristLength*Math.cos(absWristAngle)) - targetX
+            )
+        ));
+    }
+
+    public static double convertRad2Motor(double angle) {
+        return (0.75 + 
+                (angle / (2*Math.PI)
             )
         );
+    }
+
+    public static double calcWristPivotAngle() {
+        return 0.62 - ((absWristAngle - calcPivotAngle()) / (2*Math.PI));
     }
     
     public static double calcExtensionDistance() {
         double pivotAngle = calcPivotAngle();
         
         return ((
-            a - 
-                (b * Math.sin(pivotAngle)) -
-                c -
-                (d * Math.sin(g))
+            targetY - 
+                (minExtension * Math.sin(pivotAngle)) -
+                pivotHeight -
+                (wristLength * Math.sin(absWristAngle))
             ) / 
             (Math.sin(pivotAngle))
         );

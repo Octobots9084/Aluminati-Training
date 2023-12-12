@@ -3,27 +3,21 @@ package frc.robot.subsystems.Arms;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 public class RevKinem extends InstantCommand {
-    private double absWristAngle;
-    private double targetX;
-    private double targetY;
 
-    public RevKinem (double wristAngle, double targetX, double targetY) {
-        wristAngle = absWristAngle;
-        this.targetX = targetX;
-        this.targetY = targetY; 
-
+    public RevKinem (double wristAngle, double targetX, double targetY) { 
         
-        calculateReverseKinematics.setVariables(absWristAngle, targetX, targetY);
-        Pivoter.getInstance().rotate(calculateReverseKinematics.calcPivotAngle());
-        Wrist.getInstance().rotate(absWristAngle);
-        Extender.getInstance().extend(calculateReverseKinematics.calcExtensionDistance());
+        // CalculateReverseKinematics.setVariables(wristAngle, targetX, targetY);
+        // Pivoter.getInstance().rotate(CalculateReverseKinematics.calcPivotAngle());
+        // Wrist.getInstance().rotate(wristAngle);
+        // Extender.getInstance().extend(CalculateReverseKinematics.calcExtensionDistance());
         
     }
 
     public static void main(String[] args)
     {
-        calculateReverseKinematics.setVariables(0.82, 3, 1);
-        System.out.println(calculateReverseKinematics.calcPivotAngle());
-        System.out.println(calculateReverseKinematics.calcExtensionDistance());
+        CalculateReverseKinematics.setVariables(0, 1, 2);
+        System.out.println(CalculateReverseKinematics.convertRad2Motor(CalculateReverseKinematics.calcPivotAngle()));
+        System.out.println(CalculateReverseKinematics.calcExtensionDistance());
+        System.out.println(CalculateReverseKinematics.calcWristPivotAngle());
     }
 }
