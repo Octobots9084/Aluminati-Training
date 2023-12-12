@@ -1,9 +1,9 @@
 package frc.robot.subsystems.Arms;
 
-public class calculateReverseKinematics {
-    private static final double pivotHeight = 1;
-    private static final double minExtension = 1;
-    private static final double wristLength = 1;
+public class CalculateReverseKinematics {
+    private static final double pivotHeight = 0.8382;
+    private static final double minExtension = 0.6604;
+    private static final double wristLength = 0.135255;
     
     private static double a;
     private static double b = minExtension;
