@@ -4,9 +4,17 @@
 
 package frc.robot;
 
+import java.io.File;
+
+import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.SwerveDrive.drivebase.TeleopDrive;
+import frc.robot.subsystems.SwerveSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -18,7 +26,9 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
-
+  private final SwerveSubsystem drivebase = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(),
+  "swerve"));
+  XboxController controller = new XboxController(0);
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -73,10 +83,16 @@ public class Robot extends TimedRobot {
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
-    // this line or comment it out.
+    // this line or comment it out. 
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    TeleopDrive closedFieldRel = new TeleopDrive(
+      drivebase,
+        () -> MathUtil.applyDeadband(controller.getLeftY(), 0.2),
+        () -> MathUtil.applyDeadband(controller.getLeftX(), 0.2),
+        () -> -controller.getRightX(), () -> false);
+    drivebase.setDefaultCommand(closedFieldRel);
   }
 
   /** This function is called periodically during operator control. */
