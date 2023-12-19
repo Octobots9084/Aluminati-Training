@@ -77,7 +77,7 @@ public class Pivoter extends SubsystemBase {
     /**
      * @param position Meters
      */
-    
+    // these numbers *might* be wrong
     double MIN_ANGLE = 0.535;
     double MAX_ANGLE = 0.7;
     public void rotate(double angle) {
