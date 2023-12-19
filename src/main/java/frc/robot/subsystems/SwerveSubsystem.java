@@ -31,6 +31,8 @@ public class SwerveSubsystem extends SubsystemBase{
 
     //Variables
     private final SwerveDrive swerveDrive;
+    private SwerveAutoBuilder autoBuilder = null;
+
     public double maxSpeed = Units.feetToMeters(5);
     public SwerveSubsystem(File directory){
         SwerveDriveTelemetry.verbosity = TelemetryVerbosity.HIGH;
@@ -55,6 +57,65 @@ public class SwerveSubsystem extends SubsystemBase{
     public SwerveController getSwerveController()
     {
         return swerveDrive.swerveController;
+    }
+
+    public SwerveDriveKinematics getKinematics() {
+        return swerveDrive.kinematics;
+    }
+
+    public void resetOdemetry(Pose2d HolonomicPose){
+        swerveDrive.resetOdometry(HolonomicPose);
+    }
+
+    public Pose2d getPose(){
+        return swerveDrive.getPose();
+    }
+
+    public void setChassisSpeeds(ChassisSpeeds chassisSpeeds){
+        swerveDrive.setChassisSpeeds(chassisSpeeds);
+    }
+
+    public void zeroGyro() {
+        swerveDrive.zeroGyro();
+    }
+
+    public Rotation2d getHeading() {
+        return swerveDrive.getYaw();
+    }
+
+    public ChassisSpeeds getTargetSpeeds(double xInput, double yInput, Rotation2d angle) {
+        xInput = Math.pow(xInput, 3);
+        yInput = Math.pow(yInput, 3);
+        return swerveDrive.swerveController.getRawTargetSpeeds(xInput, yInput, angle.getRadians(), getHeading().getRadians());
+    }
+
+    public ChassisSpeeds getFieldVelocity() {
+        return swerveDrive.getFieldVelocity();
+    }
+
+    public ChassisSpeeds getRobotVelocity(){
+        return swerveDrive.getRobotVelocity();
+    }
+
+    public SwerveDriveConfiguration getSwerveDriveConfiguration(){
+        return swerveDrive.swerveDriveConfiguration;
+    }
+
+    public void lock() {
+        swerveDrive.lockPose();
+    }
+
+    public Rotation2d getPitch() {
+        return swerveDrive.getPitch();
+    }
+
+    public Command createPathPlannerCommand(String path, PathConstraints constraints, Map<String, Command> eventMap, PIDConstants translation, PIDConstants rotation, boolean useAllianceColor) {
+        List<PathPlannerTrajectory> pathGroup = PathPlanner.loadPathGroup(path, constraints);
+        if(autoBuilder == null){
+            autoBuilder = new SwerveAutoBuilder(swerveDrive::getPose, swerveDrive::resetOdometry, translation, rotation, swerveDrive::setChassisSpeeds, eventMap, this);
+        }
+
+        return autoBuilder.fullAuto(pathGroup);
     }
 
 }
