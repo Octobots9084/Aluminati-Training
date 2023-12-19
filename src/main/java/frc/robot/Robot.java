@@ -90,7 +90,7 @@ public class Robot extends TimedRobot {
     TeleopDrive closedFieldRel = new TeleopDrive(
       drivebase,
         () -> MathUtil.applyDeadband(controller.getLeftY(), 0.2),
-        () -> MathUtil.applyDeadband(controller.getLeftX(), 0.2),
+        () -> MathUtil.applyDeadband(controller.getLeftX() *-1, 0.2),
         () -> -controller.getRightX(), () -> false);
     drivebase.setDefaultCommand(closedFieldRel);
   }
