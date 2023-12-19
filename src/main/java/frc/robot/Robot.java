@@ -91,7 +91,7 @@ public class Robot extends TimedRobot {
       drivebase,
         () -> MathUtil.applyDeadband(controller.getLeftY(), 0.2),
         () -> MathUtil.applyDeadband(controller.getLeftX() *-1, 0.2),
-        () -> -controller.getRightX(), () -> false);
+        () -> -controller.getRightX() * -1, () -> true);
     drivebase.setDefaultCommand(closedFieldRel);
   }
 
