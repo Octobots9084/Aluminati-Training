@@ -42,7 +42,7 @@ public class TeleopDrive extends CommandBase{
 
         Translation2d translation = new Translation2d(xVelocity * swerve.maxSpeed, yVelocity * swerve.maxSpeed);
         
-        swerve.drive(translation, angVelocity, drivemode.getAsBoolean());
+        swerve.drive(translation, angVelocity * 0.4, drivemode.getAsBoolean());
     }
 
     @Override

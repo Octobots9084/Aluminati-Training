@@ -33,7 +33,7 @@ public class SwerveSubsystem extends SubsystemBase{
     private final SwerveDrive swerveDrive;
     private SwerveAutoBuilder autoBuilder = null;
 
-    public double maxSpeed = Units.feetToMeters(5);
+    public double maxSpeed = Units.feetToMeters(1);
     public SwerveSubsystem(File directory){
         SwerveDriveTelemetry.verbosity = TelemetryVerbosity.HIGH;
         try

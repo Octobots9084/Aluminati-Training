@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.SwerveDrive.drivebase.TeleopDrive;
 import frc.robot.subsystems.SwerveSubsystem;
@@ -89,15 +90,19 @@ public class Robot extends TimedRobot {
     }
     TeleopDrive closedFieldRel = new TeleopDrive(
       drivebase,
-        () -> MathUtil.applyDeadband(controller.getLeftY(), 0.2),
-        () -> MathUtil.applyDeadband(controller.getLeftX() *-1, 0.2),
+        () -> MathUtil.applyDeadband(controller.getLeftY(), 0),
+        () -> MathUtil.applyDeadband(controller.getLeftX() *-1, 0),
         () -> -controller.getRightX() * -1, () -> true);
     drivebase.setDefaultCommand(closedFieldRel);
   }
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    if(controller.getAButtonPressed()){
+      drivebase.zeroGyro();
+    }
+  }
 
   @Override
   public void testInit() {
