@@ -1,3 +1,5 @@
+package frc.robot.subsystems.light;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
