@@ -26,7 +26,7 @@ public class Light extends SubsystemBase{
 
     public void test(int a, int b, int c) {
         candle.setLEDs(a,b,c);
-    } 
+    }
 
     public void setStrobeAnimationPurple() {
         strobeAnimation.setR(255);
@@ -51,6 +51,13 @@ public class Light extends SubsystemBase{
         strobeAnimation.setB(0);
         animation = (strobeAnimation);
     }
+
+    public void setImageDisplay(int[][] pixels){
+        for (int i = 0; i < pixels.length; i++) {
+            candle.setLEDs(pixels[i][0], pixels[i][1], pixels[i][2], 255, i, 1);
+        }
+    }
+
     private Animation animation = strobeAnimation;
     @Override
     public void periodic() {
@@ -58,6 +65,6 @@ public class Light extends SubsystemBase{
         
     }
 
-    
+
 }
 
